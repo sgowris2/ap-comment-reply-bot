@@ -32,24 +32,54 @@ def format_instructions(instructions) -> str:
     return json.dumps(instructions, ensure_ascii=False, indent=2)
 
 
-def build_prompt(config, user_input, n=1) -> str:
+def build_prompt(config, user_input, n=1):
+    system_text = _build_system_text(config, n)
+    transcript = config.context
+    comment = user_input
+
+    system = [
+        {
+            "type": "text",
+            "text": system_text,
+            "cache_control": {"type": "ephemeral"}  # cached across all calls
+        }
+    ]
+
+    # Build user message content blocks
+    user_content = []
+
+    if transcript:
+        user_content.append({
+            "type": "text",
+            "text": f"VIDEO TRANSCRIPT:\n{transcript}",
+            "cache_control": {"type": "ephemeral"}  # cached per video
+        })
+
+    user_content.append({
+        "type": "text",
+        "text": f"COMMENT:\n{comment}"
+        # no cache_control — changes every call
+    })
+
+    return system, user_content
+
+
+def _build_system_text(config, n):
     return f"""
-{config.task}
+    {config.task}
+    
+    AP Framework:
+    {config.ap_framework}
+    
+    Instructions:
+    {format_instructions(config.instructions)}
+    
+    Context:
+    {config.context or "None"}
+    
+    Number of reply options to generate: {n}
+    """.strip()
 
-AP Framework:
-{config.ap_framework}
 
-Instructions:
-{format_instructions(config.instructions)}
-
-Context:
-{config.context or "None"}
-
-Examples:
-{format_examples(config.examples) if config.examples else "None"}
-
-User Comment:
-{user_input}
-
-Number of reply options to generate: {n}
-""".strip()
+# Examples:
+#     {format_examples(config.examples) if config.examples else "None"}

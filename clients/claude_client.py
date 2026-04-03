@@ -16,6 +16,9 @@ class ClaudeClient:
             messages=[{"role": "user", "content": request.prompt}]
         )
 
+        if request.system:
+            kwargs["system"] = request.system
+
         if request.tools:
             kwargs["tools"] = request.tools
             kwargs["tool_choice"] = request.tool_choice
