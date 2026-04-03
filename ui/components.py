@@ -1,57 +1,73 @@
 import streamlit as st
 
-def sidebar_config_editor(config):
+def sidebar_config_editor():
     st.sidebar.header("⚙️ Settings")
 
-    # Language
-    lang = st.sidebar.selectbox("Language", ["English", "Hindi"])
+    show_language = False   # If we want to enable langauge switching in the future
+    if show_language:
+        lang = st.sidebar.selectbox(
+            "Language",
+            ["English", "Hindi"],
+            index=["English", "Hindi"].index(st.session_state.language),
+            disabled=True
+        )
+    else:
+        lang = st.session_state.language
 
-    # Context (important → keep outside advanced)
-    config["context"] = st.sidebar.text_area(
+    st.session_state.config["context"] = st.sidebar.text_area(
         "Post Context (Optional)",
-        config["context"],
+        st.session_state.config["context"],
         height=120
     )
 
     with st.sidebar.expander("Prompt Settings", expanded=False):
-        config["system_prompt"] = st.text_area(
-            "System Prompt",
-            config["system_prompt"],
+        st.session_state.config["task"] = st.text_area(
+            "Task",
+            st.session_state.config["task"],
             height=200
         )
-
-        config["instructions"] = st.text_area(
+        st.session_state.config["instructions"] = st.text_area(
             "Instructions",
-            config["instructions"],
+            st.session_state.config["instructions"],
             height=200
         )
-
-        config["ap_framework"] = st.text_area(
+        st.session_state.config["ap_framework"] = st.text_area(
             "AP Framework",
-            config.get("ap_framework", ""),
+            st.session_state.config.get("ap_framework", ""),
             height=200
         )
 
-    model = st.sidebar.selectbox(
+    model_options = {
+        "⚡ Fast (Haiku 4.5)": "claude-haiku-4-5",
+        "🧠 Smart (Sonnet 4.6)": "claude-sonnet-4-6",
+    }
+    labels = list(model_options.keys())
+    values = list(model_options.values())
+    st.session_state.model = st.sidebar.selectbox(
         "Model",
-        ["claude-haiku-4-5", "claude-sonnet-4-6"]
+        labels,
+        index=values.index(st.session_state.model)
     )
+    st.session_state.model = model_options[st.session_state.model]
 
     with st.sidebar.expander("Generation Settings", expanded=False):
-        temperature = st.slider("Creativity", 0.0, 1.0, 0.5)
-        n = st.slider("Replies", 1, 5, 1)
+        st.session_state.temperature = st.slider(
+            "Creativity", 0.0, 1.0, st.session_state.temperature
+        )
+        st.session_state.n = st.slider(
+            "Replies", 1, 5, st.session_state.n
+        )
 
-    return config, model, temperature, n, lang
+    return lang
 
 
-def display_results(results):
-    for i, r in enumerate(results):
+def display_results(replies, usage, cost):
+    for i, r in enumerate(replies):
         with st.container():
             st.markdown(f"### Reply {i+1}")
             st.write(r["text"])
-
-            usage = r["usage"]
-            st.caption(
-                f"Tokens → Input: {usage.input_tokens} | Output: {usage.output_tokens}"
-            )
             st.divider()
+
+    st.caption(
+        f"Tokens → Input: {usage.input_tokens} | Output: {usage.output_tokens} | 💰 Cost: Rs. {cost*100.0:.2f}"
+    )

@@ -6,23 +6,25 @@ class ClaudeClient:
         self.client = anthropic.Anthropic(
             api_key=os.getenv("ANTHROPIC_API_KEY")
         )
-
-        self.default_model = os.getenv(
-            "DEFAULT_MODEL",
-            "claude-3-sonnet-20240229"
-        )
+        self.default_model = os.getenv("DEFAULT_MODEL", "claude-sonnet-4-6")
 
     def generate(self, request):
-        response = self.client.messages.create(
+        kwargs = dict(
             model=request.model,
-            max_tokens=500,
+            max_tokens=1000,
             temperature=request.temperature,
-            messages=[
-                {"role": "user", "content": request.prompt}
-            ]
+            messages=[{"role": "user", "content": request.prompt}]
         )
 
+        if request.tools:
+            kwargs["tools"] = request.tools
+            kwargs["tool_choice"] = request.tool_choice
+
+        response = self.client.messages.create(**kwargs)
+        block = response.content[0]
+
         return {
-            "text": response.content[0].text,
+            "input": block.input if hasattr(block, "input") else None,
+            "text": block.text if hasattr(block, "text") else None,
             "usage": response.usage
         }

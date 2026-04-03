@@ -7,7 +7,7 @@ import streamlit as st
 from ui.state import init_state, switch_language
 from ui.components import sidebar_config_editor, display_results
 from clients.claude_client import ClaudeClient
-from api.api import generate_replies
+from api.generate_replies import generate_replies
 from domain.models import PromptConfig
 
 
@@ -30,18 +30,13 @@ def main():
 
     init_state()
 
-    # Sidebar config
-    config_dict, model, temperature, n, lang = sidebar_config_editor(
-        st.session_state.config
-    )
+    lang = sidebar_config_editor()
 
-    # Language switch
     if lang != st.session_state.language:
         switch_language(lang)
 
-    config = PromptConfig(**config_dict)
+    config = PromptConfig(**st.session_state.config)
 
-    # Main input (center focus)
     st.markdown("### Enter Comment")
 
     with st.form(key="input_form", clear_on_submit=False):
@@ -50,25 +45,25 @@ def main():
             placeholder="Paste Instagram comment here...",
             height=120
         )
-
         submitted = st.form_submit_button("Generate")
 
-    # Generate on submit (Enter works here)
     if submitted and user_input.strip():
         st.session_state.last_input = user_input
-
         client = ClaudeClient()
-
-        results = generate_replies(
+        replies, usage, cost = generate_replies(
             config,
             user_input,
-            n,
-            model,
-            temperature,
+            st.session_state.n,
+            st.session_state.model,
+            st.session_state.temperature,
             client
         )
+        st.session_state.last_replies = replies
+        st.session_state.last_usage = usage
+        st.session_state.last_cost = cost
 
-        display_results(results)
+    if st.session_state.get("last_replies"):
+        display_results(st.session_state.last_replies, st.session_state.last_usage, st.session_state.last_cost)
 
 
 if __name__ == "__main__":

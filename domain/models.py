@@ -1,8 +1,8 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 @dataclass
 class PromptConfig:
-    system_prompt: str
+    task: str
     instructions: str
     examples: list
     context: str
@@ -13,3 +13,5 @@ class GenerationRequest:
     prompt: str
     temperature: float
     model: str
+    tools: list = field(default_factory=list)
+    tool_choice: dict = field(default_factory=dict)
