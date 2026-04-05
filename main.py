@@ -7,6 +7,7 @@ import streamlit as st
 from ui.state import init_state, switch_language
 from ui.components import sidebar_config_editor, display_results, AP_FRAMEWORK_OPTIONS, display_results_streaming
 from clients.claude_client import ClaudeClient
+from api.logging_service import log_generation_event_async, construct_log_payload
 from api.generate_replies import generate_replies
 from domain.models import PromptConfig
 
@@ -90,14 +91,16 @@ def comment_generation_screen():
                 st.session_state.last_cost = cost
 
         display_results_streaming(replies, usage, cost)
+        payload = construct_log_payload(cost, replies, usage, user_input)
+        log_generation_event_async(payload)
 
     elif st.session_state.get("last_replies"):
         display_results(st.session_state.last_replies, st.session_state.last_usage, st.session_state.last_cost)
 
 
-def main():
+def main(env=None):
 
-    init_state()
+    init_state(env)
     if not st.session_state.authenticated:
         login_screen()
         return
@@ -115,6 +118,11 @@ if __name__ == "__main__":
     if not os.getenv("USER_USERNAME") or not os.getenv("USER_PASSWORD"):
         raise ValueError("Missing USER_USERNAME or USER_PASSWORD")
 
+    if not os.getenv("SUPABASE_URL") or not os.getenv("SUPABASE_KEY"):
+        raise ValueError("Missing SUPABASE_URL or SUPABASE_KEY")
+
+    ENVIRONMENT = os.getenv("ENV", "development").strip()
+
     CREDENTIALS = {
         "admin": {
             "username": os.getenv("ADMIN_USERNAME").strip(),
@@ -130,4 +138,4 @@ if __name__ == "__main__":
         for role, creds in CREDENTIALS.items()
     }
 
-    main()
+    main(env=ENVIRONMENT)

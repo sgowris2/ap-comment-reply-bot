@@ -1,3 +1,4 @@
+import json
 from domain.prompt_builder import build_prompt
 from domain.models import GenerationRequest
 
@@ -40,6 +41,8 @@ def generate_replies(config, user_input, n, model, temperature, client):
 
     response = client.generate(request)
     reply_options = response["input"]["reply_options"]  # already a parsed list
+    if isinstance(reply_options, str):
+        reply_options = json.loads(reply_options)
     usage = response["usage"]
     cost = calculate_cost(model, usage)
 
@@ -55,7 +58,6 @@ def calculate_cost(model, usage):
     cache_write  = getattr(usage, "cache_creation_input_tokens", 0)
     cache_read   = getattr(usage, "cache_read_input_tokens", 0)
     plain_input  = usage.input_tokens
-    print(f"Usage - Input: {plain_input}, Cache Write: {cache_write}, Cache Read: {cache_read}, Output: {usage.output_tokens}")
 
     return (
         (plain_input  / 1_000_000) * pricing["input"]        +

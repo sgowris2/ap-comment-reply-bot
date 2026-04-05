@@ -2,7 +2,9 @@ import streamlit as st
 from config.english import DEFAULT_CONFIG as EN
 from config.hindi import DEFAULT_CONFIG as HI
 
-def init_state():
+def init_state(env=None):
+
+    st.session_state.environment = env
 
     if "authenticated" not in st.session_state:
         st.session_state.authenticated = False

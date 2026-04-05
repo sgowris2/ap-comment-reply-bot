@@ -2,3 +2,4 @@ streamlit
 anthropic
 tiktoken
 python-dotenv
+supabase
