@@ -41,7 +41,14 @@ def login_screen():
 
 
 def comment_generation_screen():
-    st.set_page_config(layout="wide")
+    st.set_page_config(layout="wide", initial_sidebar_state="expanded")
+    st.markdown("""
+        <style>
+            [data-testid="collapsedControl"] {
+                display: none;
+            }
+        </style>
+    """, unsafe_allow_html=True)
     st.markdown(
         """
         <style>
