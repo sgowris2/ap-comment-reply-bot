@@ -101,6 +101,10 @@ def comment_generation_screen():
 def main(env=None):
 
     init_state(env)
+    st.set_page_config(
+        page_title="AP Comment Reply Generator",
+        page_icon="💬",
+    )
     if not st.session_state.authenticated:
         login_screen()
         return
