@@ -55,6 +55,7 @@ def calculate_cost(model, usage):
     cache_write  = getattr(usage, "cache_creation_input_tokens", 0)
     cache_read   = getattr(usage, "cache_read_input_tokens", 0)
     plain_input  = usage.input_tokens
+    print(f"Usage - Input: {plain_input}, Cache Write: {cache_write}, Cache Read: {cache_read}, Output: {usage.output_tokens}")
 
     return (
         (plain_input  / 1_000_000) * pricing["input"]        +

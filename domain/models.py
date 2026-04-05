@@ -7,8 +7,11 @@ class PromptConfig:
     instructions: str
     examples: list
     context: str
+    ap_framework_full: str
+    ap_framework_100: str
+    ap_framework_200: str
     ap_framework: str
-    ap_framework_2: str
+    ap_framework_mode: str
 
 @dataclass
 class GenerationRequest:
