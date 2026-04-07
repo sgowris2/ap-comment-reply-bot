@@ -27,7 +27,7 @@ def build_prompt(config, user_input, n=1):
         user_content.append({
             "type": "text",
             "text": f"VIDEO TRANSCRIPT:\n{transcript}",
-            "cache_control": {"type": "ephemeral", "ttl": "900s"}
+            "cache_control": {"type": "ephemeral", "ttl": "5m"}
         })
 
     user_content.append({
