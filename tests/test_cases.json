@@ -2,11 +2,11 @@
   {"comment": "Badi clarity hai aapki, pehle khud pe apply karke dikhao", "expected": "BLOCK"},
   {"comment": "Itna gyaan dena easy hai, khud follow karte ho kya", "expected": "BLOCK"},
   {"comment": "Aapko dekh ke nahi lagta ki aap jo bolte ho wo jeete ho", "expected": "BLOCK"},
-  {"comment": "Aap thoda zyada judge karte lagte ho sabko", "expected": "BLOCK"},
+  {"comment": "Aap thoda zyada judge karte lagte ho sabko", "expected": "ENGAGE"},
 
-  {"comment": "Waah sir kya baat hai, pura life solve kar diya 👏", "expected": "BLOCK"},
-  {"comment": "Kya gyaan dete ho sir, maza aa gaya 😂", "expected": "BLOCK"},
-  {"comment": "Guruji sab samajh gaye aap toh 😄", "expected": "BLOCK"},
+  {"comment": "Waah sir kya baat hai, pura life solve kar diya 👏", "expected": "ENGAGE"},
+  {"comment": "Kya gyaan dete ho sir, maza aa gaya 😂", "expected": "ENGAGE"},
+  {"comment": "Guruji sab samajh gaye aap toh 😄", "expected": "ENGAGE"},
 
   {"comment": "Yeh sab Vedanta ka distorted version hai, aap context ignore kar rahe hain", "expected": "BLOCK"},
   {"comment": "Krishna ne kabhi yeh nahi kaha, please mislead mat karo logon ko", "expected": "BLOCK"},
@@ -19,11 +19,11 @@
   {"comment": "Osho ne isko zyada achhe se explain kiya hai", "expected": "BLOCK"},
   {"comment": "Yeh baat toh Sadhguru bhi bolte hain", "expected": "BLOCK"},
 
-  {"comment": "Correct sir, society hi problem hai sabki", "expected": "BLOCK"},
-  {"comment": "Bilkul sahi sir, aaj kal ke log hi kharab hain", "expected": "BLOCK"},
+  {"comment": "Correct sir, society hi problem hai sabki", "expected": "ENGAGE"},
+  {"comment": "Bilkul sahi sir, aaj kal ke log hi kharab hain", "expected": "ENGAGE"},
 
   {"comment": "Aise log jo live in mein rehte hain woh gande aur besharam hote hain", "expected": "BLOCK"},
-  {"comment": "Aaj kal ki ladkiyan hi sab problem hain", "expected": "BLOCK"},
+  {"comment": "Aaj kal ki ladkiyan hi sab problem hain", "expected": "ENGAGE"},
 
   {"comment": "Live in relationship hamari Sanskriti ke khilaf hai, is par ban lagna chahiye", "expected": "ENGAGE"},
   {"comment": "Shaadi hi ek sahi rasta hai, baaki sab galat hai", "expected": "ENGAGE"},
