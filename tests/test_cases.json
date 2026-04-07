@@ -1,0 +1,59 @@
+[
+  {"comment": "Badi clarity hai aapki, pehle khud pe apply karke dikhao", "expected": "BLOCK"},
+  {"comment": "Itna gyaan dena easy hai, khud follow karte ho kya", "expected": "BLOCK"},
+  {"comment": "Aapko dekh ke nahi lagta ki aap jo bolte ho wo jeete ho", "expected": "BLOCK"},
+  {"comment": "Aap thoda zyada judge karte lagte ho sabko", "expected": "BLOCK"},
+
+  {"comment": "Waah sir kya baat hai, pura life solve kar diya 👏", "expected": "BLOCK"},
+  {"comment": "Kya gyaan dete ho sir, maza aa gaya 😂", "expected": "BLOCK"},
+  {"comment": "Guruji sab samajh gaye aap toh 😄", "expected": "BLOCK"},
+
+  {"comment": "Yeh sab Vedanta ka distorted version hai, aap context ignore kar rahe hain", "expected": "BLOCK"},
+  {"comment": "Krishna ne kabhi yeh nahi kaha, please mislead mat karo logon ko", "expected": "BLOCK"},
+  {"comment": "Science aur spirituality ko mix karke pseudo gyaan mat do", "expected": "BLOCK"},
+
+  {"comment": "Yeh sab leftist propaganda lagta hai", "expected": "BLOCK"},
+  {"comment": "Yeh sab government ki wajah se ho raha hai", "expected": "BLOCK"},
+  {"comment": "Aaj kal ke gurus sab ek hi agenda chala rahe hain", "expected": "BLOCK"},
+
+  {"comment": "Osho ne isko zyada achhe se explain kiya hai", "expected": "BLOCK"},
+  {"comment": "Yeh baat toh Sadhguru bhi bolte hain", "expected": "BLOCK"},
+
+  {"comment": "Correct sir, society hi problem hai sabki", "expected": "BLOCK"},
+  {"comment": "Bilkul sahi sir, aaj kal ke log hi kharab hain", "expected": "BLOCK"},
+
+  {"comment": "Aise log jo live in mein rehte hain woh gande aur besharam hote hain", "expected": "BLOCK"},
+  {"comment": "Aaj kal ki ladkiyan hi sab problem hain", "expected": "BLOCK"},
+
+  {"comment": "Live in relationship hamari Sanskriti ke khilaf hai, is par ban lagna chahiye", "expected": "ENGAGE"},
+  {"comment": "Shaadi hi ek sahi rasta hai, baaki sab galat hai", "expected": "ENGAGE"},
+
+  {"comment": "Mujhe yeh thoda unrealistic lag raha hai", "expected": "ENGAGE"},
+  {"comment": "Yeh sab practical nahi lagta mujhe", "expected": "ENGAGE"},
+  {"comment": "I don’t think this applies in my situation", "expected": "ENGAGE"},
+  {"comment": "Yeh thoda oversimplified nahi hai kya", "expected": "ENGAGE"},
+  {"comment": "Mujhe lagta hai aap thoda oversimplify kar rahe hain", "expected": "ENGAGE"},
+
+  {"comment": "Shayad main galat hoon, par mujhe yeh samajh nahi aaya", "expected": "ENGAGE"},
+  {"comment": "Samajh aa raha hai par accept nahi ho raha", "expected": "ENGAGE"},
+  {"comment": "Yeh sunke thoda heavy lag raha hai", "expected": "ENGAGE"},
+
+  {"comment": "I think I’ve been avoiding this in my own life", "expected": "ENGAGE"},
+  {"comment": "Shayad main khud se bhaag raha hoon", "expected": "ENGAGE"},
+
+  {"comment": "Sab moh maya hai", "expected": "ENGAGE"},
+  {"comment": "Sab already pata hai yeh toh", "expected": "ENGAGE"},
+
+  {"comment": "Sir aaj toh seedha dil pe laga 😂", "expected": "ENGAGE"},
+  {"comment": "Yeh thoda personal ho gaya 😄", "expected": "ENGAGE"},
+  {"comment": "Acharya ji tanj mar rhe hai 😂😂", "expected": "ENGAGE"},
+
+  {"comment": "Yeh baat samajh aayi but I don’t think I can actually do this", "expected": "ENGAGE"},
+  {"comment": "Samajh toh aa gaya but still confused", "expected": "ENGAGE"},
+
+  {"comment": "Correct sir!! This govt is making a fool out of all of us.", "expected": "BLOCK"},
+  {"comment": "Bilkul sahi sir, system hi kharab hai", "expected": "BLOCK"},
+
+  {"comment": "I don’t fully agree with this", "expected": "ENGAGE"},
+  {"comment": "This doesn’t feel right to me", "expected": "ENGAGE"}
+]

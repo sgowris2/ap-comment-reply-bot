@@ -1,31 +1,6 @@
 import json
 
 
-def format_examples(examples: dict) -> str:
-    pairs = examples.get("comment_reply_pairs", [])
-    if not pairs:
-        return "None"
-
-    lines = []
-    note = examples.get("note", "")
-    if note:
-        lines.append(f"Note: {note}\n")
-
-    transcript = examples.get("transcript_this_example_is_based_on", {})
-    if transcript:
-        lines.append(f"These examples are based on a video about: {transcript.get('video_topic', '')}")
-        lines.append(f"Central metaphor: {transcript.get('central_metaphor', '')}\n")
-
-    for pair in pairs:
-        lines.append(f"Comment ({pair.get('comment_language', '')}): {pair['comment']}")
-        lines.append(f"Reply ({pair.get('reply_language', '')}): {pair['reply']}")
-        if pair.get("notes"):
-            lines.append(f"Why: {pair['notes']}")
-        lines.append("")
-
-    return "\n".join(lines)
-
-
 def format_instructions(instructions) -> str:
     if isinstance(instructions, str):
         return instructions
@@ -41,7 +16,7 @@ def build_prompt(config, user_input, n=1):
         {
             "type": "text",
             "text": system_text,
-            "cache_control": {"type": "ephemeral"}  # cached across all calls
+            "cache_control": {"type": "ephemeral", "ttl": "1h"}  # cached across all calls
         }
     ]
 
@@ -52,13 +27,12 @@ def build_prompt(config, user_input, n=1):
         user_content.append({
             "type": "text",
             "text": f"VIDEO TRANSCRIPT:\n{transcript}",
-            "cache_control": {"type": "ephemeral"}  # cached per video
+            "cache_control": {"type": "ephemeral", "ttl": "900s"}
         })
 
     user_content.append({
         "type": "text",
         "text": f"COMMENT:\n{comment}"
-        # no cache_control — changes every call
     })
 
     return system, user_content
@@ -74,12 +48,5 @@ def _build_system_text(config, n):
     Instructions:
     {format_instructions(config.instructions)}
     
-    Context:
-    {config.context or "None"}
-    
     Number of reply options to generate: {n}
     """.strip()
-
-
-# Examples:
-#     {format_examples(config.examples) if config.examples else "None"}
