@@ -38,16 +38,11 @@ def verify_password(password, stored_hash):
 def authenticate(username, password):
     credentials = get_credentials()
 
-    print(credentials)
-    print(username)
     user = credentials.get(username)
-    print(user)
     if not user:
         return None
 
     if verify_password(password, user["password_hash"]):
-        print("Password verified for user:", username)
         return user["role"]
 
-    print("Password verification failed for user:", username)
     return None
