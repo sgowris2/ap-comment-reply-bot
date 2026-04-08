@@ -1,5 +1,4 @@
 from enum import Enum
-import anthropic
 
 class LLMErrorType(Enum):
     AUTH = "auth"                # wrong API key
@@ -8,20 +7,26 @@ class LLMErrorType(Enum):
     UNAVAILABLE = "unavailable"  # provider down / overloaded
     UNKNOWN = "unknown"          # everything else
 
+class LLMError(Exception):
+    def __init__(self, error_type: LLMErrorType, message: str = ""):
+        self.error_type = error_type
+        self.message = message
+        super().__init__(f"{error_type.value}: {message}")
+
 
 def handle_llm_error(error_type, attempt):
 
     if error_type == LLMErrorType.AUTH:
-        raise Exception("❌ Invalid API key. Fix credentials.")
+        raise LLMError(error_type, "❌ Invalid API key. Fix credentials.")
 
     elif error_type == LLMErrorType.NO_CREDITS:
-        raise Exception("💳 No credits left. Check billing.")
+        raise LLMError(error_type, "💳 No credits left. Check billing.")
 
     elif error_type == LLMErrorType.RATE_LIMIT:
-        raise Exception("⏳ Rate limit hit. Slow down.")
+        raise LLMError(error_type, "⏳ Rate limit hit. Slow down.")
 
     elif error_type == LLMErrorType.UNAVAILABLE:
-        raise Exception("⚠️ Service unavailable. Try again later.")
+        raise LLMError(error_type, "⚠️ Service unavailable. Try again later.")
 
-    elif error_type == LLMErrorType.UNKNOWN:
-        raise Exception("❓ An unknown error occurred. Check logs for details.")
+    else:
+        raise LLMError(error_type, "❓ An unknown error occurred. Check logs for details.")

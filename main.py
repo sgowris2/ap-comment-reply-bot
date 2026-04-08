@@ -1,18 +1,23 @@
+import logging
 import os
 
 import bcrypt
 import streamlit as st
+
+from utils.llm_error_handling import LLMError
 from utils.load_secrets import inject_secrets_to_env
+
 inject_secrets_to_env()
 
 from ui.state import init_state, switch_language
 from ui.components import sidebar_config_editor, display_results, AP_FRAMEWORK_OPTIONS, display_results_streaming
 from clients.claude_client import ClaudeClient
-from api.logging_service import log_generation_event_async, construct_log_payload
-from api.generate_replies import generate_replies
+from services.logging_service import log_generation_event_async, construct_log_payload
+from services.generate_replies import generate_replies
 from domain.models import PromptConfig
 from utils.auth_utils import authenticate
 
+logger = logging.getLogger(__name__)
 
 
 def login_screen():
@@ -42,33 +47,6 @@ def login_screen():
             st.rerun()
         else:
             st.error("Invalid credentials")
-
-# def login_screen():
-#     st.markdown(
-#         """
-#         <h1 style='text-align: center;'>💬 AP Comment Reply Generator</h1>
-#         <h3 style='text-align: center;'>🔐 Login</h3>
-#         """,
-#         unsafe_allow_html=True
-#     )
-#     st.write("")
-#     username = st.text_input("Username").strip()
-#     password = st.text_input("Password", type="password").strip()
-#     st.write("")
-#     col1, col2, col3 = st.columns([2, 1, 2])
-#     with col2:
-#         login_clicked = st.button("Login", use_container_width=True)
-#     st.write("")
-#
-#     if login_clicked:
-#         role = AUTH_LOOKUP.get((username, password))
-#         if role:
-#             st.session_state.authenticated = True
-#             st.session_state.role = role
-#             st.session_state.is_admin = role == "admin"
-#             st.rerun()
-#         else:
-#             st.error("Invalid credentials")
 
 
 def create_new_user_screen():
@@ -167,8 +145,7 @@ def comment_generation_screen():
         display_results(st.session_state.last_replies, st.session_state.last_usage, st.session_state.last_cost)
 
 
-def main(env=None):
-
+def main(env=None, debug=False):
     try:
         init_state(env)
         st.set_page_config(
@@ -181,7 +158,13 @@ def main(env=None):
         comment_generation_screen()
 
     except Exception as e:
-        st.warning(str(e))
+        if debug:
+            raise
+        elif isinstance(e, LLMError):
+            st.warning(str(e))
+        else:
+            st.error("An unexpected error occurred. Please try again later.")
+            logger.exception("Unexpected error occurred")
 
 
 if __name__ == "__main__":
@@ -202,27 +185,6 @@ if __name__ == "__main__":
         raise ValueError("Missing SUPABASE_URL or SUPABASE_KEY")
 
     ENVIRONMENT = os.getenv("APP_ENV", "development").strip()
+    DEBUG = os.getenv("APP_DEBUG", "false").lower() == "true"
 
-
-    # admin = {
-    #     "username": os.getenv("AUTH_ADMIN_USERNAME").strip(),
-    #     "password": os.getenv("AUTH_ADMIN_PASSWORD").strip(),
-    # }
-    # users_raw = os.getenv("AUTH_USERS", "[]")
-    # users_list = json.loads(users_raw)
-    #
-    # CREDENTIALS = dict()
-    # CREDENTIALS["admin"] = admin
-    # for user in users_list:
-    #     username = user["username"].strip()
-    #     password = user["password"].strip()
-    #     CREDENTIALS[username] = {
-    #         "username": username,
-    #         "password": password,
-    #     }
-    # AUTH_LOOKUP = {
-    #     (creds["username"], creds["password"]): role
-    #     for role, creds in CREDENTIALS.items()
-    # }
-
-    main(env=ENVIRONMENT)
+    main(env=ENVIRONMENT, debug=DEBUG)
