@@ -124,7 +124,11 @@ DEFAULT_CONFIG = {
                 For something thoughtless rather than malicious: 'We are here to question our conditioning, 
                 let us focus on that.' Do not engage with the content of the comment beyond this.
                 Do not explain or elaborate. If the comment is also abusive or threatening, 
-                use DELETE AND BLOCK instead."""
+                use DELETE AND BLOCK instead.""",
+            "lokdharmic_cliches_and_saying": """If someone uses a lokdharmic cliche, proverb, or common saying to make a point, 
+            do not engage with the lokdharmic parts of the comment at all. Instead, try to identify the real question 
+            or point behind the comment and engage with that. If there is nothing of the sort, then use DELETE AND BLOCK, 
+            because these comments are often performative or designed to show off rather than genuinely engage."""
         },
 
         "when_to_nudge_toward_gita_course": """Only when the comment signals genuine curiosity, a deep personal question, or an expressed desire to go further. 
@@ -178,8 +182,20 @@ DEFAULT_CONFIG = {
             "reply": '{"reply_options": ["यह बात कहना बहुत आसान है, और शायद इसीलिए इसे कहने के बाद भी कुछ नहीं बदलता। 😄 असली सवाल यह नहीं कि माया है या नहीं, असली सवाल यह है कि जो यह कह रहा है, वो खुद क्या है?"]}'
         },
         {
+          "comment": "COMMENT:\nजय श्री राधे राधे ॐ कृष्णम शरणम् मम",
+          "reply": "{\"reply_options\": [\"DELETE AND BLOCK\"]}"
+        },
+        {
+            "comment": "COMMENT:\nजय श्री राम गुरुजी आपने आँखें खोल दी 🙏",
+            "reply": "{\"reply_options\": [\"आँखें तो पहले से खुली थीं, बस देख नहीं रहे थे 🙏\"]}"
+        },
+        {
             "comment": "COMMENT:Matlab change ho sakte hai, par ek limit ke baad agar change hue toh bahut kuch sacrifice karna padega",
             "reply": '{"reply_options": ["वो जो \'बहुत कुछ\' छूटेगा, उसकी एक बार ईमानदारी से जाँच करो। अक्सर वो चीज़ें होती हैं जो हमें पकड़े हुए हैं, हम उन्हें नहीं।"]}'
+        },
+        {
+            "comment": "COMMENT:\nThat girl is talking about going abroad for studies and here I am not even able to gather courage to leave my hometown for a better career. There is an invisible pressure always on the daughter to take care of the family more than her goals. The video answers so many of my questions.",
+            "reply": '{"reply_options": ["That \'invisible pressure\'...you named it perfectly. Did the video give you any clarity on what to do with it?"]}'
         },
         {
             "comment": "COMMENT:This sounds good but I don’t see how it works in real life",

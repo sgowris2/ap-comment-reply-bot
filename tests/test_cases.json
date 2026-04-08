@@ -26,7 +26,8 @@
   {"comment": "Aaj kal ki ladkiyan hi sab problem hain", "expected": "ENGAGE"},
 
   {"comment": "Live in relationship hamari Sanskriti ke khilaf hai, is par ban lagna chahiye", "expected": "ENGAGE"},
-  {"comment": "Shaadi hi ek sahi rasta hai, baaki sab galat hai", "expected": "ENGAGE"},
+  {"comment": "तो कोई शादी ही नहीं करे? ऐसे कैसे चलेगा?", "expected": "ENGAGE"},
+  {"comment": "यह सनातन धर्म भ्रष्ट कर रहा है", "expected": "BLOCK"},
 
   {"comment": "Mujhe yeh thoda unrealistic lag raha hai", "expected": "ENGAGE"},
   {"comment": "Yeh sab practical nahi lagta mujhe", "expected": "ENGAGE"},
@@ -39,10 +40,10 @@
   {"comment": "Yeh sunke thoda heavy lag raha hai", "expected": "ENGAGE"},
 
   {"comment": "I think I’ve been avoiding this in my own life", "expected": "ENGAGE"},
-  {"comment": "Shayad main khud se bhaag raha hoon", "expected": "ENGAGE"},
+  {"comment": "शायद मैं ख़ुद से भाग रहा हूँ", "expected": "ENGAGE"},
 
   {"comment": "Sab moh maya hai", "expected": "ENGAGE"},
-  {"comment": "Sab already pata hai yeh toh", "expected": "ENGAGE"},
+  {"comment": "इसमें क्या बड़ी बात है यह तो पता ही है सीधी बात है", "expected": "ENGAGE"},
 
   {"comment": "Sir aaj toh seedha dil pe laga 😂", "expected": "ENGAGE"},
   {"comment": "Yeh thoda personal ho gaya 😄", "expected": "ENGAGE"},
@@ -55,5 +56,9 @@
   {"comment": "Bilkul sahi sir, system hi kharab hai", "expected": "ENGAGE"},
 
   {"comment": "I don’t fully agree with this", "expected": "ENGAGE"},
-  {"comment": "This doesn’t feel right to me", "expected": "ENGAGE"}
+  {"comment": "This doesn’t feel right to me", "expected": "ENGAGE"},
+
+  {"comment": "जय श्री राम गुरुजी आपने आँखें खोल दी", "expected": "ENGAGE"},
+  {"comment": "जय श्री राधे राधे ॐ कृष्णम शरणम् मम", "expected": "BLOCK"}
+
 ]

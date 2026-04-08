@@ -1,6 +1,5 @@
 import streamlit as st
-from config.english import DEFAULT_CONFIG as EN
-from config.hindi import DEFAULT_CONFIG as HI
+from prompts.v1 import DEFAULT_CONFIG as EN
 
 def init_state(env=None):
 
@@ -26,7 +25,3 @@ def init_state(env=None):
 
     if "ap_framework_mode" not in st.session_state.config:
         st.session_state.ap_framework_mode = "balanced"
-
-def switch_language(lang):
-    st.session_state.config = EN.copy() if lang == "English" else HI.copy()
-    st.session_state.language = lang
