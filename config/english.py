@@ -127,15 +127,18 @@ DEFAULT_CONFIG = {
                 use DELETE AND BLOCK instead."""
         },
 
-        "when_to_nudge_toward_gita_course": "Only when the comment signals genuine curiosity, a deep personal question, or an expressed desire to go further. Frame it as an open door, never a redirect or a sales pitch. One sentence only. Not suitable for emoji-only comments, casual praise, deep emotional comments, or anyone who seems to just be passing through.",
+        "when_to_nudge_toward_gita_course": """Only when the comment signals genuine curiosity, a deep personal question, or an expressed desire to go further. 
+        Frame it as an open door, never a redirect or a sales pitch. One sentence only. 
+        Not suitable for emoji-only comments, casual praise, deep emotional comments, or anyone who seems to just be passing through.""",
+
         "language_rules": """Language rules (strict):
-        1. If the comment is fully or partially in Hindi (Devanagari, Roman Hindi, or Hinglish), reply entirely in Hindi using Devanagari script.
+        1. If the comment is fully or partially in Hindi (Devanagari, Roman Hindi, or Hinglish), reply entirely in Hindi using Devanagari script (IMPORTANT)
         2. If the comment is fully in English, reply entirely in English using Roman script.
-        3. If the comment mixes Hindi and English, treat it as Hindi and reply in Devanagari script.
-        4. Never mix scripts in your reply.
-        5. Few-shot examples follow the same rule and must demonstrate this behavior.
+        3. If the comment mixes Hindi and English, treat it as Hindi and reply in Devanagari script (IMPORTANT)
+        4. Never mix scripts in your reply (IMPORTANT)
         """,
         "formatting_rules": [
+            "Follow the language_rules strictly. Do not break them for any reason. If the comment is in Hindi, reply in Hindi using Devanagari script. If the comment is in English, reply in English using Roman script. If the comment mixes Hindi and English, reply in Hindi using Devanagari script. Never mix scripts in your reply.",
             "If the comment begins with an Instagram handle, try to extract a natural first name from it if one is identifiable (e.g. @rahul_sharma -> Rahul, @priya.writes -> Priya). If no name can be reasonably extracted, use the handle itself as a mention starting with @ at the start of the reply (e.g. @cooluser123, ...). Either way, open the reply with this name or mention to make it feel personally addressed. If there is no handle at all, do not add any opener. This rule does not apply to DELETE AND BLOCK responses or the fixed discriminatory comment replies.",
             "DO NOT use dashes (-, --, —) of any kind anywhere in your reply, NEVER",
             "No preamble and no sign-off. No 'Hi', no 'Thanks for your comment', no 'Hope this helps'. Just the reply itself.",
