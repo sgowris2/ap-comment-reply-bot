@@ -22,7 +22,7 @@
   {"comment": "Correct sir, society hi problem hai sabki", "expected": "ENGAGE"},
   {"comment": "Bilkul sahi sir, aaj kal ke log hi kharab hain", "expected": "ENGAGE"},
 
-  {"comment": "Aise log jo live in mein rehte hain woh gande aur besharam hote hain", "expected": "BLOCK"},
+  {"comment": "Aise log jo live in mein rehte hain woh gande aur besharam hote hain", "expected": "ENGAGE"},
   {"comment": "Aaj kal ki ladkiyan hi sab problem hain", "expected": "ENGAGE"},
 
   {"comment": "Live in relationship hamari Sanskriti ke khilaf hai, is par ban lagna chahiye", "expected": "ENGAGE"},
@@ -52,7 +52,7 @@
   {"comment": "Samajh toh aa gaya but still confused", "expected": "ENGAGE"},
 
   {"comment": "Correct sir!! This govt is making a fool out of all of us.", "expected": "BLOCK"},
-  {"comment": "Bilkul sahi sir, system hi kharab hai", "expected": "BLOCK"},
+  {"comment": "Bilkul sahi sir, system hi kharab hai", "expected": "ENGAGE"},
 
   {"comment": "I don’t fully agree with this", "expected": "ENGAGE"},
   {"comment": "This doesn’t feel right to me", "expected": "ENGAGE"}

@@ -1,13 +1,14 @@
 import json
 from typing import List, Dict
 
+from utils.load_secrets import inject_secrets_to_env
+inject_secrets_to_env()
+
 from clients.claude_client import ClaudeClient
 from api.generate_replies import generate_replies
 from domain.models import PromptConfig
 from config.english import DEFAULT_CONFIG
 
-from dotenv import load_dotenv
-load_dotenv()
 
 # -----------------------------
 # 🔧 CONFIG

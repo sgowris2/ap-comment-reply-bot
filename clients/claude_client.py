@@ -7,9 +7,9 @@ from utils.llm_error_handling import LLMErrorType, handle_llm_error
 class ClaudeClient:
     def __init__(self):
         self.client = anthropic.Anthropic(
-            api_key=os.getenv("ANTHROPIC_API_KEY")
+            api_key=os.getenv("API_KEYS_ANTHROPIC")
         )
-        self.default_model = os.getenv("DEFAULT_MODEL", "claude-sonnet-4-6")
+        self.default_model = os.getenv("APP_DEFAULT_MODEL", "claude-sonnet-4-6")
 
     def generate(self, request):
         kwargs = dict(

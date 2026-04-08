@@ -9,6 +9,11 @@
 .env
 .env.local
 .env.*.local
+secret.toml
+secrets.toml
+.streamlit/secret.toml
+.streamlit/secrets.toml
+verify_password_hash.py
 
 
 # -------------------------------------------------------------

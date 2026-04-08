@@ -127,6 +127,8 @@ def display_results(replies, usage, cost):
 
 def _display_cost(cost, usage):
     if st.session_state.is_admin:
+        cache_write = getattr(usage, "cache_creation_input_tokens", 0)
+        cache_read = getattr(usage, "cache_read_input_tokens", 0)
         st.caption(
-            f"Tokens → Input: {usage.input_tokens} | Output: {usage.output_tokens} | 💰 Cost: Rs. {cost * 100.0:.2f}"
+            f"Tokens → Input: {usage.input_tokens} (Cache Read: {cache_read}, Write: {cache_write}) | Output: {usage.output_tokens} | 💰 Cost: Rs. {cost * 100.0:.2f}"
         )

@@ -21,7 +21,7 @@ def build_prompt(config, user_input, n=1):
     ]
 
     # Build user message content blocks
-    user_content = []
+    user_content = list()
 
     if transcript:
         user_content.append({
@@ -29,6 +29,12 @@ def build_prompt(config, user_input, n=1):
             "text": f"VIDEO TRANSCRIPT:\n{transcript}",
             "cache_control": {"type": "ephemeral", "ttl": "5m"}
         })
+
+    user_content.append({
+        "type": "text",
+        "text": f"Number of reply options to generate: {n}",
+        "cache_control": {"type": "ephemeral", "ttl": "1h"}
+    })
 
     user_content.append({
         "type": "text",
@@ -47,6 +53,4 @@ def _build_system_text(config, n):
     
     Instructions:
     {format_instructions(config.instructions)}
-    
-    Number of reply options to generate: {n}
     """.strip()
