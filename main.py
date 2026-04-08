@@ -107,15 +107,19 @@ def comment_generation_screen():
 
 def main(env=None):
 
-    init_state(env)
-    st.set_page_config(
-        page_title="AP Comment Reply Generator",
-        page_icon="💬",
-    )
-    if not st.session_state.authenticated:
-        login_screen()
-        return
-    comment_generation_screen()
+    try:
+        init_state(env)
+        st.set_page_config(
+            page_title="AP Comment Reply Generator",
+            page_icon="💬",
+        )
+        if not st.session_state.authenticated:
+            login_screen()
+            return
+        comment_generation_screen()
+
+    except Exception as e:
+        st.warning(str(e))
 
 
 if __name__ == "__main__":
