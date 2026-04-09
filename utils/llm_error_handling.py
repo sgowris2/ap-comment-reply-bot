@@ -1,11 +1,12 @@
+import logging
 from enum import Enum
 
 class LLMErrorType(Enum):
-    AUTH = "auth"                # wrong API key
-    NO_CREDITS = "no_credits"    # quota exhausted
-    RATE_LIMIT = "rate_limit"    # too many requests
-    UNAVAILABLE = "unavailable"  # provider down / overloaded
-    UNKNOWN = "unknown"          # everything else
+    AUTH = "AUTH"                # wrong API key
+    NO_CREDITS = "NO_CREDITS"    # quota exhausted
+    RATE_LIMIT = "RATE_LIMIT"    # too many requests
+    UNAVAILABLE = "UNAVAILABLE"  # provider down / overloaded
+    UNKNOWN = "UNKNOWN"          # everything else
 
 class LLMError(Exception):
     def __init__(self, error_type: LLMErrorType, message: str = ""):
@@ -14,7 +15,7 @@ class LLMError(Exception):
         super().__init__(f"{error_type.value}: {message}")
 
 
-def handle_llm_error(error_type, attempt):
+def handle_llm_error(error_type, exception: Exception, attempt):
 
     if error_type == LLMErrorType.AUTH:
         raise LLMError(error_type, "❌ Invalid API key. Fix credentials.")
@@ -29,4 +30,6 @@ def handle_llm_error(error_type, attempt):
         raise LLMError(error_type, "⚠️ Service unavailable. Try again later.")
 
     else:
-        raise LLMError(error_type, "❓ An unknown error occurred. Check logs for details.")
+        # Raise the error with the full traceback for logging, but show a generic message to the user
+        logging.exception(exception)
+        raise LLMError(error_type, "❓ Unknown error occurred. Check logs for details.")

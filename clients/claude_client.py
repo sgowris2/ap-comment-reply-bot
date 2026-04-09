@@ -36,25 +36,25 @@ class ClaudeClient:
                 "usage": response.usage
             }
         except Exception as e:
-            error_type = self.classify_anthropic_error(e)
-            handle_llm_error(error_type, attempt=0)
+            error_type, exception = self.classify_anthropic_error(e)
+            handle_llm_error(error_type, exception, attempt=0)
 
 
     @staticmethod
-    def classify_anthropic_error(e: Exception) -> LLMErrorType:
+    def classify_anthropic_error(e: Exception) -> tuple[LLMErrorType, Exception]:
         msg = str(e).lower()
 
         # --- AUTH ---
         if isinstance(e, anthropic.AuthenticationError):
-            return LLMErrorType.AUTH
+            return LLMErrorType.AUTH, e
 
         # --- RATE LIMIT ---
         if isinstance(e, anthropic.RateLimitError):
-            return LLMErrorType.RATE_LIMIT
+            return LLMErrorType.RATE_LIMIT, e
 
         # --- NO CREDITS / QUOTA ---
         if "credit" in msg or "quota" in msg or "billing" in msg:
-            return LLMErrorType.NO_CREDITS
+            return LLMErrorType.NO_CREDITS, e
 
         # --- UNAVAILABLE (most important bucket) ---
         if isinstance(e, (
@@ -62,10 +62,10 @@ class ClaudeClient:
                 anthropic.APITimeoutError,
                 anthropic.InternalServerError
         )):
-            return LLMErrorType.UNAVAILABLE
+            return LLMErrorType.UNAVAILABLE, e
 
         if "overloaded" in msg:
-            return LLMErrorType.UNAVAILABLE
+            return LLMErrorType.UNAVAILABLE, e
 
         # --- FALLBACK ---
-        return LLMErrorType.UNKNOWN
+        return LLMErrorType.UNKNOWN, e
