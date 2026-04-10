@@ -37,7 +37,7 @@ def sidebar_config_editor():
                 st.session_state.config["instructions"],
                 height=200,
             )
-
+            st.session_state["ap_framework_text"] = st.session_state.config.get("ap_framework", "")
             st.session_state.config["ap_framework"] = st.text_area(
                 "AP Framework",
                 key="ap_framework_text",
