@@ -10,7 +10,7 @@ from utils.load_secrets import inject_secrets_to_env
 inject_secrets_to_env()
 
 from ui.state import init_state
-from ui.components import sidebar_config_editor, display_results, AP_FRAMEWORK_OPTIONS, display_results_streaming
+from ui.components import sidebar_config_editor, display_results, display_results_streaming
 from clients.claude_client import ClaudeClient
 from services.logging_service import log_generation_event_async, construct_log_payload
 from services.generate_replies import generate_replies
@@ -104,10 +104,6 @@ def comment_generation_screen():
     )
     st.title("💬 AP Comment Reply Generator")
     lang = sidebar_config_editor()
-    selected_mode = st.session_state.config.get("ap_framework_mode", "balanced")
-    framework_key = AP_FRAMEWORK_OPTIONS[selected_mode]
-    st.session_state.config["ap_framework"] = st.session_state.config.get(framework_key, st.session_state.config.get(
-        "ap_framework_full", ""))
     config = PromptConfig(**st.session_state.config)
     st.markdown("### Enter Comment")
     with st.form(key="input_form", clear_on_submit=False):

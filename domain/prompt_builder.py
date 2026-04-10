@@ -9,7 +9,7 @@ def format_instructions(instructions) -> str:
 
 def build_prompt(config, user_input, n=1):
     system_text = _build_system_text(config, n)
-    transcript = config.context
+    transcript = config.context.strip()
     comment = user_input
 
     system = [

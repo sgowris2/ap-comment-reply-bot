@@ -2,11 +2,6 @@ import time
 
 import streamlit as st
 
-AP_FRAMEWORK_OPTIONS = {
-    "full": "ap_framework_full",
-    "balanced": "ap_framework_200",
-    "short": "ap_framework_100",
-}
 
 def sidebar_config_editor():
     is_admin = st.session_state.is_admin
@@ -30,11 +25,6 @@ def sidebar_config_editor():
         height=400
     )
 
-    apf_labels = list(AP_FRAMEWORK_OPTIONS.keys())
-    default_label = st.session_state.config.get("ap_framework_mode", apf_labels[0])
-    if default_label not in apf_labels:
-        default_label = apf_labels[0]
-
     if is_admin:
         with st.sidebar.expander("Prompt Settings", expanded=False):
             st.session_state.config["task"] = st.text_area(
@@ -47,17 +37,6 @@ def sidebar_config_editor():
                 st.session_state.config["instructions"],
                 height=200,
             )
-            selected_label = st.selectbox(
-                "AP Framework",
-                apf_labels,
-                index=apf_labels.index(default_label),
-                key="ap_framework_mode",
-            )
-            st.session_state.config["ap_framework_mode"] = selected_label
-            if st.session_state.get("last_ap_mode") != selected_label:
-                framework_key = AP_FRAMEWORK_OPTIONS[selected_label]
-                st.session_state["ap_framework_text"] = st.session_state.config.get(framework_key, "")
-                st.session_state["last_ap_mode"] = selected_label
 
             st.session_state.config["ap_framework"] = st.text_area(
                 "AP Framework",
@@ -65,16 +44,13 @@ def sidebar_config_editor():
                 height=200,
             )
 
-    selected_mode = st.session_state.config.get("ap_framework_mode", "balanced")
-    framework_key = AP_FRAMEWORK_OPTIONS[selected_mode]
-    st.session_state.config["ap_framework"] = st.session_state.config.get(framework_key, "")
-
 
     if is_admin:
         with st.sidebar.expander("Model Settings", expanded=False):
             model_options = {
                 "⚡ Fast (Haiku 4.5)": "claude-haiku-4-5",
                 "🧠 Smart (Sonnet 4.6)": "claude-sonnet-4-6",
+                "🎨 Creative (Opus 4.6)": "claude-opus-4-6",
             }
             model_labels = list(model_options.keys())
             model_values = list(model_options.values())

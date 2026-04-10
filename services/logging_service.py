@@ -44,7 +44,6 @@ def construct_log_payload(cost, replies, usage, user_input):
         "role": st.session_state.get("role"),
 
         "transcript": st.session_state.config.get("context"),
-        "ap_framework_mode": st.session_state.config.get("ap_framework_mode"),
 
         "model": st.session_state.model,
         "temperature": st.session_state.temperature,

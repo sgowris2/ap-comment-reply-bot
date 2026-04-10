@@ -2,6 +2,7 @@
 #  ap-comment-reply-bot — .gitignore
 # =============================================================
 .idea/
+*.csv
 
 # -------------------------------------------------------------
 # Environment & secrets — NEVER commit these

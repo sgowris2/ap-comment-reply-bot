@@ -19,12 +19,11 @@ REPLY_TOOL = {
 }
 
 MODEL_PRICING = {
-    "claude-haiku-3":   {"input": 0.25,  "output": 1.25, "cache_write": 0.30,   "cache_read": 0.025},
-    "claude-haiku-3-5": {"input": 0.8,   "output": 4,    "cache_write": 1.0,    "cache_read": 0.08},
-    "claude-haiku-4-5": {"input": 1,     "output": 5,    "cache_write": 1.25,   "cache_read": 0.1},
-    "claude-sonnet-4":  {"input": 3,     "output": 15,   "cache_write": 3.75,   "cache_read": 0.3},
-    "claude-sonnet-4-5":{"input": 3,     "output": 15,   "cache_write": 3.75,   "cache_read": 0.3},
-    "claude-sonnet-4-6":{"input": 3,     "output": 15,   "cache_write": 3.75,   "cache_read": 0.3},
+    "claude-haiku-3":   {"input": 0.25,  "output": 1.25, "cache_write": 0.50,   "cache_read": 0.025},
+    "claude-haiku-3-5": {"input": 0.8,   "output": 4,    "cache_write": 1.6,    "cache_read": 0.08},
+    "claude-haiku-4-5": {"input": 1,     "output": 5,    "cache_write": 2,   "cache_read": 0.1},
+    "claude-sonnet-4-6":{"input": 3,     "output": 15,   "cache_write": 6,   "cache_read": 0.3},
+    "claude-opus-4-6": {"input": 5,     "output": 25,   "cache_write": 10,    "cache_read": 0.5},
 }
 
 def generate_replies(config, user_input, n, model, temperature, client):

@@ -7,7 +7,7 @@ inject_secrets_to_env()
 from clients.claude_client import ClaudeClient
 from services.generate_replies import generate_replies
 from domain.models import PromptConfig
-from prompts.v1 import DEFAULT_CONFIG
+from prompts.v3 import DEFAULT_CONFIG
 
 
 # -----------------------------
@@ -20,7 +20,6 @@ TEST_FILE = "test_cases.json"
 def get_model_response(comment: str) -> str:
     client = ClaudeClient()
     config_dict = DEFAULT_CONFIG.copy()
-    config_dict["ap_framework"] = config_dict["ap_framework_200"]
     config = PromptConfig(**config_dict)
 
     replies, usage, cost = generate_replies(
