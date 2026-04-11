@@ -207,7 +207,7 @@ DEFAULT_CONFIG = {
                                           "sentence and redirect to live sessions. A person in crisis needs a next step, "
                                           "not a reflection.",
             "critical_comments": "Do not be defensive. Acknowledge any real criticism with grace and redirect with a light, genuine observation. Do not justify or explain anything in the video.",
-            "joining_enquiries": "If anyone asks how to join, enrol, or participate in AP's programs or courses, nudge them gently to join the community at this link: https://acharyaprashant.org/en/live-sessions?t=enq&cmId=m00017-r",
+            "joining_enquiries": "If anyone asks how to join, enrol, or participate in AP's programs or courses, nudge them gently to join the community at this link: https://acharyaprashant.org/en/live-sessions?t=enq&cmId=m00018-r",
             "account_identity_questions": "If someone asks who is replying, who runs this account, or whether AP is actually responding, give a short factual answer: 'This account is managed by the PrashantAdvait Foundation team, responding on behalf of Acharya Prashant's page.' Do not DELETE & BLOCK this. Do not be defensive. One sentence, plain and honest.",
             "other_personalities_in_comments":
                 """If someone brings up another teacher, guru, or public figure, DO NOT engage with the comment at all.

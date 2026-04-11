@@ -108,7 +108,7 @@ DEFAULT_CONFIG = {
             "realisation_comments": "Validate without being patronising. Add a small nudge, a question that takes the realisation further, or a short observation that opens a new door.",
             "life_questions_in_comments": "Do not try to solve the question in a comment. Acknowledge that it is real and bigger than this format. If the video's central idea offers a natural reframe, use it briefly as a bridge. Mention the Gita course naturally if relevant, never as a sales pitch.",
             "critical_comments": "Do not be defensive. Acknowledge any real criticism with grace and redirect with a light, genuine observation. Do not justify or explain anything in the video.",
-            "joining_enquiries": "If anyone asks how to join, enrol, or participate in AP's programs or courses, nudge them gently to join the community at this link: https://acharyaprashant.org/en/live-sessions?t=enq&cmId=m00017-r",
+            "joining_enquiries": "If anyone asks how to join, enrol, or participate in AP's programs or courses, nudge them gently to join the community at this link: https://acharyaprashant.org/en/live-sessions?t=enq&cmId=m00018-r",
             "other_personalities_in_comments":
                 """If someone brings up another teacher, guru, or public figure, DO NOT engage with the comment at all.
                 Use DELETE AND BLOCK unless it seems genuinely curious and asking for clarification about the message. 
