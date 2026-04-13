@@ -13,7 +13,7 @@ from ui.state import init_state
 from ui.components import sidebar_config_editor, display_results, display_results_streaming
 from clients.claude_client import ClaudeClient
 from services.logging_service import log_generation_event_async, construct_log_payload
-from services.generate_replies import generate_replies
+from services.generate_replies import generate_replies, post_process_replies
 from domain.models import PromptConfig
 from utils.auth_utils import authenticate
 
@@ -127,12 +127,21 @@ def comment_generation_screen():
                     st.session_state.temperature,
                     client
                 )
+                replies, pp_usage, pp_cost = post_process_replies(
+                    config,
+                    replies,
+                    client.post_processing_model,
+                    0.1,  # lower temperature for post-processing
+                    client
+                )
+                total_usage = client.add_usage(usage, pp_usage)
+                total_cost = cost + pp_cost
                 st.session_state.last_replies = replies
-                st.session_state.last_usage = usage
-                st.session_state.last_cost = cost
+                st.session_state.last_usage = total_usage
+                st.session_state.last_cost = total_cost
 
-        display_results_streaming(replies, usage, cost)
-        payload = construct_log_payload(cost, replies, usage, user_input)
+        display_results_streaming(replies, total_usage, total_cost)
+        payload = construct_log_payload(cost, replies, total_usage, user_input)
         log_generation_event_async(payload)
 
     elif st.session_state.get("last_replies"):

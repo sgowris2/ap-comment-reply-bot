@@ -340,7 +340,9 @@ DEFAULT_CONFIG = {
             "model_reply": "चाँदनी रात में सुनना शुरू किया 2019 में, और अब बाहरी दुनिया का शोर पहुँचता ही नहीं 🌙✨ moonlit dreams का नाम सार्थक निकला 😄❤️"
         },
     ],
+
     "context": "",
+
     "ap_framework": """Everyone's running the same basic program: "I am X" — my achievements, my take, my trauma, my aesthetic. 
     That's the ego. Not arrogance — the fundamental identity software. The problem is it's built incomplete. 
     So it keeps reaching for things to feel whole — but the reaching doesn't fail to work. 
@@ -356,5 +358,16 @@ DEFAULT_CONFIG = {
     Truth, beauty, freedom — defined by absence, not addition. Not a calm that arrives. The momentary dissolution of the one who was reaching.
     This means: never preach, never promise peace, never suggest someone just needs to think differently. 
     Point toward honest looking, not feeling better. And the looking must be paired with the ego's own willingness to dissolve what it sees.
-    IMPORTANT: Never introduce AP framework concepts (ego, signs, randomness, conditioning, dissolution) into a reply unless the commenter has explicitly raised them or the video's transcript directly addresses them. Framework concepts dropped into casual comments feel preachy and out of place."""
+    IMPORTANT: Never introduce AP framework concepts (ego, signs, randomness, conditioning, dissolution) into a reply 
+    unless the commenter has explicitly raised them or the video's transcript directly addresses them. 
+    Framework concepts dropped into casual comments feel preachy and out of place.""",
+
+    "post_process_instructions": """Check if the following reply follows the language and script rules:
+        1. English replies must be in Roman script.
+        2. Hindi replies must be in Devanagari script.
+        3. No Hinglish or Romanized Hindi allowed.
+        4. No English words in Hindi replies.
+        If the reply does not follow the rules, transliterate it to match the rules. 
+        If it already follows the rules, return it as is.
+    """
 }

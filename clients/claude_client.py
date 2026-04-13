@@ -1,5 +1,6 @@
 import anthropic
 import os
+from anthropic.types.usage import Usage
 
 from utils.llm_error_handling import LLMErrorType, handle_llm_error
 
@@ -10,6 +11,7 @@ class ClaudeClient:
             api_key=os.getenv("API_KEYS_ANTHROPIC")
         )
         self.default_model = os.getenv("APP_DEFAULT_MODEL", "claude-sonnet-4-6")
+        self.post_processing_model = os.getenv("APP_POST_PROCESSING_MODEL", "claude-haiku-4-5")
 
     def generate(self, request):
         kwargs = dict(
@@ -38,6 +40,22 @@ class ClaudeClient:
         except Exception as e:
             error_type, exception = self.classify_anthropic_error(e)
             handle_llm_error(error_type, exception, attempt=0)
+
+
+    @staticmethod
+    def add_usage(usage1: Usage, usage2: Usage) -> Usage:
+        """Combine two Usage objects by summing their token counts."""
+        return Usage(
+            cache_creation=usage1.cache_creation or usage2.cache_creation,
+            cache_creation_input_tokens=(usage1.cache_creation_input_tokens or 0) + (
+                        usage2.cache_creation_input_tokens or 0),
+            cache_read_input_tokens=(usage1.cache_read_input_tokens or 0) + (usage2.cache_read_input_tokens or 0),
+            inference_geo=usage1.inference_geo or usage2.inference_geo,
+            input_tokens=usage1.input_tokens + usage2.input_tokens,
+            output_tokens=usage1.output_tokens + usage2.output_tokens,
+            server_tool_use=usage1.server_tool_use or usage2.server_tool_use,
+            service_tier=usage1.service_tier or usage2.service_tier,
+        )
 
 
     @staticmethod

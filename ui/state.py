@@ -1,5 +1,5 @@
 import streamlit as st
-from prompts.v3 import DEFAULT_CONFIG as EN
+from prompts.v4 import DEFAULT_CONFIG as EN
 
 def init_state(env=None):
 

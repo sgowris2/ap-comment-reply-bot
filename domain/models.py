@@ -8,6 +8,7 @@ class PromptConfig:
     examples: list
     context: str
     ap_framework: str
+    post_process_instructions: Optional[str] = None
 
 @dataclass
 class GenerationRequest:

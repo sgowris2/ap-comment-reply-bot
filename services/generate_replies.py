@@ -48,6 +48,34 @@ def generate_replies(config, user_input, n, model, temperature, client):
     results = [{"text": r} for r in reply_options]
     return results, usage, cost
 
+def post_process_replies(config, replies, model, temperature, client):
+    system = config.post_process_instructions
+    prompt = list()
+    for reply in replies:
+        prompt.append({
+            "type": "text",
+            "text": f"REPLY OPTION:\n{reply['text']}"
+        })
+    request = GenerationRequest(
+        prompt=prompt,
+        system=system,
+        temperature=temperature,
+        model=model,
+        tools=[REPLY_TOOL],
+        tool_choice={"type": "tool", "name": "submit_replies"}
+    )
+    print(request)
+    response = client.generate(request)
+    print(response)
+    processed_replies = response["input"]["reply_options"]  # already a parsed list
+    if isinstance(processed_replies, str):
+        processed_replies = json.loads(processed_replies)
+    usage = response["usage"]
+    cost = calculate_cost(model, usage)
+
+    results = [{"text": r} for r in processed_replies]
+    return results, usage, cost
+
 
 def calculate_cost(model, usage):
     pricing = MODEL_PRICING.get(model)
