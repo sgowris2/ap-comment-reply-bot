@@ -1,5 +1,3 @@
-
-
 DEFAULT_CONFIG = {
     "task": "Instagram comment reply generation for Acharya Prashant's channel",
     "instructions": {

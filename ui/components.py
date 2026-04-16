@@ -67,6 +67,26 @@ def sidebar_config_editor():
                 "Replies", 1, 5, st.session_state.n,
             )
 
+    if is_admin:
+        with st.sidebar.expander("Post-Processing Settings", expanded=False):
+            st.session_state.post_process_replies = st.checkbox(
+                "Enable Post-Processing",
+                st.session_state.post_process_replies
+            )
+            if st.session_state.post_process_replies:
+                pp_model_options = {
+                    "⚡ Fast (Haiku 4.5)": "claude-haiku-4-5",
+                    "🧠 Smart (Sonnet 4.6)": "claude-sonnet-4-6",
+                }
+                pp_model_labels = list(pp_model_options.keys())
+                pp_model_values = list(pp_model_options.values())
+                st.session_state.post_processing_model = st.selectbox(
+                    "Post-Processing Model",
+                    pp_model_labels,
+                    index=pp_model_values.index(st.session_state.post_processing_model),
+                )
+                st.session_state.post_processing_model = pp_model_options[st.session_state.post_processing_model]
+
     return lang
 
 

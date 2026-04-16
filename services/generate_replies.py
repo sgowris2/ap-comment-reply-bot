@@ -1,5 +1,5 @@
 import json
-from domain.prompt_builder import build_prompt
+from domain.prompt_builder import build_prompt, format_instructions
 from domain.models import GenerationRequest
 
 REPLY_TOOL = {
@@ -15,7 +15,8 @@ REPLY_TOOL = {
             }
         },
         "required": ["reply_options"]
-    }
+    },
+    "cache_control": {"type": "ephemeral", "ttl": "1h"}
 }
 
 MODEL_PRICING = {
@@ -23,6 +24,7 @@ MODEL_PRICING = {
     "claude-haiku-3-5": {"input": 0.8,   "output": 4,    "cache_write": 1.6,    "cache_read": 0.08},
     "claude-haiku-4-5": {"input": 1,     "output": 5,    "cache_write": 2,   "cache_read": 0.1},
     "claude-sonnet-4-6":{"input": 3,     "output": 15,   "cache_write": 6,   "cache_read": 0.3},
+    "claude-sonnet-4-5":{"input": 3,     "output": 15,   "cache_write": 6,   "cache_read": 0.3},
     "claude-opus-4-6": {"input": 5,     "output": 25,   "cache_write": 10,    "cache_read": 0.5},
 }
 
@@ -39,6 +41,7 @@ def generate_replies(config, user_input, n, model, temperature, client):
     )
 
     response = client.generate(request)
+
     reply_options = response["input"]["reply_options"]  # already a parsed list
     if isinstance(reply_options, str):
         reply_options = json.loads(reply_options)
@@ -49,24 +52,31 @@ def generate_replies(config, user_input, n, model, temperature, client):
     return results, usage, cost
 
 def post_process_replies(config, replies, model, temperature, client):
-    system = config.post_process_instructions
-    prompt = list()
-    for reply in replies:
-        prompt.append({
+
+    system = [
+        {
             "type": "text",
-            "text": f"REPLY OPTION:\n{reply['text']}"
-        })
+            "text": format_instructions(config.post_process_instructions),
+            "cache_control": {"type": "ephemeral", "ttl": "1h"}
+        }
+    ]
+    user_content = list()
+    user_content.append({
+        "type": "text",
+        "text": "\n".join([f"REPLY OPTION:{r['text']}" for r in replies])
+    })
+
     request = GenerationRequest(
-        prompt=prompt,
+        prompt=user_content,
         system=system,
         temperature=temperature,
         model=model,
         tools=[REPLY_TOOL],
         tool_choice={"type": "tool", "name": "submit_replies"}
     )
-    print(request)
+
     response = client.generate(request)
-    print(response)
+
     processed_replies = response["input"]["reply_options"]  # already a parsed list
     if isinstance(processed_replies, str):
         processed_replies = json.loads(processed_replies)

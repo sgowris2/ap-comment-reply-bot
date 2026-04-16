@@ -18,11 +18,11 @@ class ClaudeClient:
             model=request.model,
             max_tokens=1000,
             temperature=request.temperature,
-            messages=[{"role": "user", "content": request.prompt}]
+            messages=[{"role": "user", "content": self.normalize_blocks(request.prompt)}]
         )
 
         if request.system:
-            kwargs["system"] = request.system
+            kwargs["system"] = self.normalize_blocks(request.system)
 
         if request.tools:
             kwargs["tools"] = request.tools
@@ -41,6 +41,18 @@ class ClaudeClient:
             error_type, exception = self.classify_anthropic_error(e)
             handle_llm_error(error_type, exception, attempt=0)
 
+    @staticmethod
+    def normalize_blocks(blocks):
+        normalized = []
+        for b in blocks:
+            nb = {
+                "type": b.get("type", "text"),
+                "text": str(b.get("text", ""))
+            }
+            if "cache_control" in b:
+                nb["cache_control"] = b["cache_control"]
+            normalized.append(nb)
+        return normalized
 
     @staticmethod
     def add_usage(usage1: Usage, usage2: Usage) -> Usage:

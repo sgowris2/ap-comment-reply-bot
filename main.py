@@ -127,15 +127,20 @@ def comment_generation_screen():
                     st.session_state.temperature,
                     client
                 )
-                replies, pp_usage, pp_cost = post_process_replies(
-                    config,
-                    replies,
-                    client.post_processing_model,
-                    0.1,  # lower temperature for post-processing
-                    client
-                )
-                total_usage = client.add_usage(usage, pp_usage)
-                total_cost = cost + pp_cost
+                if st.session_state.post_process_replies:
+                    replies, pp_usage, pp_cost = post_process_replies(
+                        config,
+                        replies,
+                        st.session_state.post_processing_model,
+                        0.1,  # lower temperature for post-processing
+                        client
+                    )
+                    total_usage = client.add_usage(usage, pp_usage)
+                    total_cost = cost + pp_cost
+                else:
+                    total_usage = usage
+                    total_cost = cost
+
                 st.session_state.last_replies = replies
                 st.session_state.last_usage = total_usage
                 st.session_state.last_cost = total_cost
