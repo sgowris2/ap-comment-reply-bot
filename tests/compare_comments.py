@@ -8,7 +8,7 @@ inject_secrets_to_env()
 import pandas as pd
 from services.generate_replies import generate_replies
 from clients.claude_client import ClaudeClient
-from prompts.v4 import DEFAULT_CONFIG
+from prompts.v5 import DEFAULT_CONFIG
 from domain.models import PromptConfig
 
 

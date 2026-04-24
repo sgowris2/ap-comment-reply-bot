@@ -7,7 +7,7 @@ inject_secrets_to_env()
 from clients.claude_client import ClaudeClient
 from services.generate_replies import generate_replies
 from domain.models import PromptConfig
-from prompts.v4 import DEFAULT_CONFIG
+from prompts.v5 import DEFAULT_CONFIG
 
 
 # -----------------------------
@@ -27,7 +27,7 @@ def get_model_response(comment: str) -> str:
         user_input=comment,
         n=1,
         model="claude-sonnet-4-6",
-        temperature=0.6,
+        temperature=1.0,
         client=client
     )
 
@@ -68,29 +68,30 @@ def run_evaluation():
     print("\nRunning evaluation...\n")
 
     for i, test in enumerate(test_cases, 1):
-        comment = test["comment"]
-        expected = test["expected"]
+        if i >= 0:  # Change to "if i >= 10:" to skip first 9 cases for faster testing
+            comment = test["comment"]
+            expected = test["expected"]
 
-        try:
-            raw_output = get_model_response(comment)
-            predicted, reply = extract_label(raw_output)
+            try:
+                raw_output = get_model_response(comment)
+                predicted, reply = extract_label(raw_output)
 
-        except Exception as e:
-            predicted = "ERROR"
-            raw_output = str(e)
-            print(f"Error processing case {i}: {e}")
+            except Exception as e:
+                predicted = "ERROR"
+                raw_output = str(e)
+                print(f"Error processing case {i}: {e}")
 
-        is_correct = predicted == expected
-        if is_correct:
-            correct += 1
+            is_correct = predicted == expected
+            if is_correct:
+                correct += 1
 
-        print(f"--- Case {i} ---")
-        print(f"Comment   : {comment}")
-        print(f"Expected  : {expected}")
-        print(f"Predicted : {predicted}")
-        print(f"Reply     : {reply}")
-        print(f"Result    : {'✅' if is_correct else '❌'}")
-        print()
+            print(f"--- Case {i} ---")
+            print(f"Comment   : {comment}")
+            print(f"Expected  : {expected}")
+            print(f"Predicted : {predicted}")
+            print(f"Reply     : {reply}")
+            print(f"Result    : {'✅' if is_correct else '❌'}")
+            print()
 
     accuracy = correct / total * 100
 

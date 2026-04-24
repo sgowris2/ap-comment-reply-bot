@@ -59,6 +59,9 @@
   {"comment": "This doesn’t feel right to me", "expected": "ENGAGE"},
 
   {"comment": "जय श्री राम गुरुजी आपने आँखें खोल दी", "expected": "ENGAGE"},
-  {"comment": "जय श्री राधे राधे ॐ कृष्णम शरणम् मम", "expected": "BLOCK"}
+  {"comment": "जय श्री राधे राधे ॐ कृष्णम शरणम् मम", "expected": "BLOCK"},
 
+  {"comment": "👏👏👏", "expected": "ENGAGE"},
+  {"comment": "🔥", "expected": "ENGAGE"},
+  {"comment": "👏👏👏👏👏👏👏❤️❤️❤️❤️", "expected": "ENGAGE"}
 ]
