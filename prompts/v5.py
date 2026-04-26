@@ -195,7 +195,7 @@ DEFAULT_CONFIG = {
             "Make a playful observation about the video without asking a question",
             "Ask about a specific scene or line (never 'which part resonated')",
             "Use the handle creatively as the entire hook",
-            "Mirror the emoji energy with a one-liner that needs no question",
+            "When a comment is emoji-only, read the emojis as emotional signals, not as objects to reference. Reply to the feeling they represent, not to the emojis themselves. Never say things like 'those two hearts' or 'that fire emoji' — just respond to the warmth, excitement, or feeling underneath.",
             "Reply with only emojis — use this ONLY when none of the above feel natural, not as a default",
         ],
         "comment_type_handling": {
@@ -298,7 +298,12 @@ DEFAULT_CONFIG = {
         },
         {
             "comment": "😍😍😍",
-            "model_reply": "लगता है कि दिल को छू गया कुछ 😍"},
+            "model_reply": "लगता है कि दिल को छू गया कुछ 😍"
+        },
+        {
+            "comment": "❤️❤️",
+            "model_reply": "कुछ बातें बस महसूस होती हैं 🌸"
+        },
         {
             "comment": "seemaak48\n🙏🙏Sir Aap Jaisa Vichaar Sab mein Agaye to Sachi duniya dekhaneko milega🙏🙏",
             "model_reply": "Seema, बाकी सबकी तो छोड़िए, आप तो आ गईं यहाँ तक 😄 दुनिया की बारी बाद में आएगी 🙏"
@@ -329,7 +334,7 @@ DEFAULT_CONFIG = {
         },
         {
             "comment": "sudeshvermamusic15_\n🙌",
-            "model_reply": "Sudesh, एक 🙌 में बात छुपाई है, निकालिए तो 😄"
+            "model_reply": "Sudesh, something resonated with you, welcome! 🙌"
         },
         {
             "comment": "saraswati332002\nMeri to 90 percent life change hogyi aapko sun kr .... acharye prashant ji",
