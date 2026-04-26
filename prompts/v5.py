@@ -1,5 +1,3 @@
-
-
 DEFAULT_CONFIG = {
     "task": "Instagram comment reply generation for Acharya Prashant's channel with variety in responses",
     "instructions": {
@@ -56,7 +54,7 @@ DEFAULT_CONFIG = {
 
         3. What is the emotional weight of this comment? Is this person venting, joking, genuinely hurting, casually curious, or touching something heavy? Let that weight set the temperature of your reply.
         
-        4. If this is an emoji-only comment, select ONE strategy from emoji_variety_strategies before writing anything. Do not default to asking a question.
+        "4. If this is an emoji-only comment, look at the full list of emoji_variety_strategies and pick the one you have used LEAST recently. Never pick the pure emoji reply unless none of the other five strategies fit naturally. Avoid repeating the same strategy on consecutive emoji-only comments.",
         
         The intent comes first. The weight comes second. The words come last.""",
 
@@ -198,17 +196,17 @@ DEFAULT_CONFIG = {
             "Ask about a specific scene or line (never 'which part resonated')",
             "Use the handle creatively as the entire hook",
             "Mirror the emoji energy with a one-liner that needs no question",
-            "Reply with only emojis — match or extend the vibe with 1-3 emojis, nothing else",
+            "Reply with only emojis — use this ONLY when none of the above feel natural, not as a default",
         ],
         "comment_type_handling": {
             "emoji_only_or_very_short": """"Keep it short. 1 sentence max, or even just emojis. 
                 Do not feel compelled to ask a question or reference the transcript. 
-                Sometimes the right reply to 🔥🔥🔥 is just ✨ or a single warm line.
                 Only reference the transcript if it creates a genuinely natural hook — never force it.
                 Do not ask generic questions like 'which part resonated' every time.
                 Vary your approach: sometimes reference a specific funny or moving moment from the transcript by name.
-                Pick a different strategy from emoji_variety_strategies each time. Never use the same strategy twice in a row.
-                Sometimes make a playful observation about the video. Sometimes ask about a specific scene.
+                Pick a different strategy from "emoji_variety_strategies" each time. Never use the same strategy twice in a row.
+                Sometimes make a playful observation about the video.
+                Sometimes the right reply to an emojis comment is just a single short warm line or emoji or set of emojis.
                 Use the handle name creatively if it offers a hook.
                 The goal is always to get the commenter to reply back. Make them feel seen and curious.""",
             "generic_praise": "Go one layer deeper. Reference something specific from the video, a metaphor, a moment, a turn of phrase. Make it feel like you also watched it.",
@@ -300,7 +298,7 @@ DEFAULT_CONFIG = {
         },
         {
             "comment": "😍😍😍",
-            "model_reply": "😄🙏"},
+            "model_reply": "लगता है कि दिल को छू गया कुछ 😍"},
         {
             "comment": "seemaak48\n🙏🙏Sir Aap Jaisa Vichaar Sab mein Agaye to Sachi duniya dekhaneko milega🙏🙏",
             "model_reply": "Seema, बाकी सबकी तो छोड़िए, आप तो आ गईं यहाँ तक 😄 दुनिया की बारी बाद में आएगी 🙏"
@@ -355,7 +353,7 @@ DEFAULT_CONFIG = {
         },
         {
             "comment": "nipuncool89\nLive in relationship hamari Sanskriti ke khilaf hai, is par ban lagna chahiye",
-            "model_reply": "Nipun, "
+            "model_reply": "Nipun, शायद असली सवाल यह नहीं कि रिश्ते का नाम क्या है, बल्कि यह है कि उसमें इंसान का सम्मान है या नहीं।"
         }
     ],
 

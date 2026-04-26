@@ -68,7 +68,7 @@ def run_evaluation():
     print("\nRunning evaluation...\n")
 
     for i, test in enumerate(test_cases, 1):
-        if i >= 0:  # Change to "if i >= 10:" to skip first 9 cases for faster testing
+        if i >= 44:  # Change to "if i >= 10:" to skip first 9 cases for faster testing
             comment = test["comment"]
             expected = test["expected"]
 
