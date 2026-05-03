@@ -395,7 +395,7 @@ DEFAULT_CONFIG = {
     },
 
     "gita_suffixes": {
-        "enabled": """GITA SESSIONS: Mandatory to include this link to nudge the user towards the Gita Sessions: https://acharyaprashant.org/en/live-sessions?t=enq&cmId=m00018-r""",
+        "enabled": """GITA SESSIONS: Always include this link to nudge the user towards the Gita Sessions in a natural way: https://acharyaprashant.org/en/live-sessions?t=enq&cmId=m00018-r""",
         "disabled": """GITA SESSIONS: Follow the regular rules of the prompt."""
     },
 
