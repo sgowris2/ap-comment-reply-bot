@@ -8,6 +8,8 @@ class PromptConfig:
     examples: list
     context: str
     ap_framework: str
+    mode_suffixes: dict
+    gita_suffixes: dict
     post_process_instructions: Optional[str] = None
 
 @dataclass

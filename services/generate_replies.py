@@ -1,5 +1,5 @@
 import json
-from domain.prompt_builder import build_prompt, format_instructions
+from domain.prompt_builder import PromptBuilder
 from domain.models import GenerationRequest
 
 REPLY_TOOL = {
@@ -28,8 +28,19 @@ MODEL_PRICING = {
     "claude-opus-4-6": {"input": 5,     "output": 25,   "cache_write": 10,    "cache_read": 0.5},
 }
 
-def generate_replies(config, user_input, n, model, temperature, client):
-    system, prompt = build_prompt(config, user_input, n)
+PROMPT_BUILDER = None
+
+def get_prompt_builder(config):
+    global PROMPT_BUILDER
+    if PROMPT_BUILDER is None:
+        PROMPT_BUILDER = PromptBuilder(config)
+    return PROMPT_BUILDER
+
+def generate_replies(config, user_input, n, model, temperature, client, is_serious=False, gita_link=False):
+
+    prompt_builder = get_prompt_builder(config)
+    system, prompt = prompt_builder.build_prompt(user_input, n,
+                                                 mode="serious" if is_serious else "regular", gita=gita_link)
 
     request = GenerationRequest(
         prompt=prompt,
@@ -56,7 +67,7 @@ def post_process_replies(config, replies, model, temperature, client):
     system = [
         {
             "type": "text",
-            "text": format_instructions(config.post_process_instructions),
+            "text": PromptBuilder.format_instructions(config.post_process_instructions),
             "cache_control": {"type": "ephemeral", "ttl": "1h"}
         }
     ]

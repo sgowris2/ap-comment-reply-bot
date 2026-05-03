@@ -112,7 +112,15 @@ def comment_generation_screen():
             placeholder="Paste Instagram comment here...",
             height=120
         )
-        submitted = st.form_submit_button("Generate Replies")
+
+        col1, col2, col3 = st.columns([3, 1, 1])
+
+        with col1:
+            submitted = st.form_submit_button("Generate Replies")
+        with col2:
+            is_serious = st.checkbox("Sensitive Topic", value=False)
+        with col3:
+            append_gita_link = st.checkbox("Append Gita Link", value=False)
     status_placeholder = st.empty()
     if submitted and user_input.strip():
         with status_placeholder:
@@ -125,7 +133,9 @@ def comment_generation_screen():
                     st.session_state.n,
                     st.session_state.model,
                     st.session_state.temperature,
-                    client
+                    client,
+                    is_serious=is_serious,
+                    gita_link=append_gita_link
                 )
                 if st.session_state.post_process_replies:
                     replies, pp_usage, pp_cost = post_process_replies(

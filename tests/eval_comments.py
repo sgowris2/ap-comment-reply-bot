@@ -7,7 +7,7 @@ inject_secrets_to_env()
 from clients.claude_client import ClaudeClient
 from services.generate_replies import generate_replies
 from domain.models import PromptConfig
-from prompts.v5 import DEFAULT_CONFIG
+from prompts.v6 import DEFAULT_CONFIG
 
 
 # -----------------------------
